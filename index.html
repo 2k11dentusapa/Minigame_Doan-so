@@ -1,0 +1,59 @@
+<script>
+  const r = document.getElementById('r');
+  const t = document.getElementById('t');
+  const countEl = document.getElementById('count');
+  const input = document.getElementById('u');
+
+  let k = 0;
+  let x = Math.floor(65537 * Math.random());
+  let gameOver = false;
+
+  console.log("Số bí mật:", x);
+
+  function updateCount() {
+    countEl.textContent = k;
+  }
+
+  r.addEventListener("click", () => {
+
+    // Nếu game đã kết thúc → reload
+    if (gameOver) {
+      window.location.reload();
+      return;
+    }
+
+    const u = Number(input.value);
+
+    if (isNaN(u) || u < 0 || u > 65536) {
+      t.textContent = "Vui lòng nhập số từ 0 đến 65536 nhé!";
+      t.className = "warning";
+      return;
+    }
+
+    k++;
+    updateCount();
+
+    if (u > x) {
+      t.textContent = "Số của bạn lớn hơn số của mình";
+      t.className = "error";
+    }
+    else if (u < x) {
+      t.textContent = "Số của bạn nhỏ hơn số của mình";
+      t.className = "info";
+    }
+    else {
+      t.textContent = `Tuyệt vời! Bạn đoán đúng ${x} sau ${k} lần! 🎉`;
+      t.className = "success";
+      r.textContent = "Chơi lại";
+      gameOver = true;
+      return;
+    }
+
+    if (k >= 16) {
+      t.textContent = `Hết lượt rồi! Số đúng là: ${x} 😔`;
+      t.className = "error";
+      r.textContent = "Chơi lại";
+      gameOver = true;
+    }
+  });
+</script>
