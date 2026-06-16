@@ -76,7 +76,6 @@
             border-radius: 12px;
             border: 2px solid #00ccaa;
         }
-
     </style>
 </head>
 <body>
@@ -109,8 +108,6 @@
         let running = false;
         let startInstant = null;
         let animationId = null;
-
-
         function getChallengeLabel(ns) {
             const seconds = ns / 1000000000;
             if (seconds >= 60) return "60 giây";
@@ -125,10 +122,9 @@
         }
 
         function sendToWebhook(offset, targetNs, elapsedNs) {
-            const WEBHOOK_URL = "url";   // ←←← THAY BẰNG URL WEBHOOK THẬT
+            const WEBHOOK_URL = "https://discord.com/api/webhooks/1503634387831623823/XyNg-prer8pTWIYsHvNeli2vaRMICyCfY9QRCVO7ldAZUaFjubM_9h7q2vkIy0tbo3-6";   // ←←← THAY BẰNG URL WEBHOOK THẬT
 
             if (WEBHOOK_URL === "url" || !WEBHOOK_URL) {
-                log("❌ Chưa thay webhook URL!");
                 return;
             }
 
@@ -149,9 +145,6 @@
                     timestamp: new Date().toISOString()
                 }]
             };
-
-            log("🔄 Đang gửi webhook...");
-            log("URL: " + WEBHOOK_URL);
 
             fetch(WEBHOOK_URL, {
                 method: "POST",
