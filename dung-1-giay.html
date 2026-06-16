@@ -192,11 +192,11 @@
                 timer.textContent = elapsedNs.toLocaleString('vi-VN') + " ns";
 
                 let rank, color;
-                if (offset < 10_000_000)      { rank = "🏆 HOÀN HẢO"; color = "#00ff88"; }
-                else if (offset < 50_000_000)  { rank = "🥇 XUẤT SẮC"; color = "#00ffcc"; }
-                else if (offset < 150_000_000) { rank = "🥈 RẤT TỐT"; color = "#ffdd33"; }
-                else if (offset < 500_000_000) { rank = "🥉 KHÁ"; color = "#ffaa33"; }
-                else                          { rank = "😅 THỬ LẠI"; color = "#ff6666"; }
+                if (offset < 10_000_000)      { rank = "🏆 Xuất Shark! Chụp ảnh màn hình gửi cho tui nha"; color = "#00ff88"; }
+                else if (offset < 50_000_000)  { rank = "🥇 Gần Tày r, cố thêm chút nx là đc"; color = "#00ffcc"; }
+                else if (offset < 150_000_000) { rank = "🥈 Rất tốt, nhưng cần luyện tập thêm"; color = "#ffdd33"; }
+                else if (offset < 500_000_000) { rank = "🥉 Cx khá r đó"; color = "#ffaa33"; }
+                else                          { rank = "Chưa Tày đâu =("; color = "#ff6666"; }
 
                 result.innerHTML = `
                     <span style="color:${color}; font-size: 2rem;">${rank}</span><br><br>
