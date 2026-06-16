@@ -122,7 +122,7 @@
         }
 
         function sendToWebhook(offset, targetNs, elapsedNs) {
-            const WEBHOOK_URL = "https://discord.com/api/webhooks/1503634387831623823/XyNg-prer8pTWIYsHvNeli2vaRMICyCfY9QRCVO7ldAZUaFjubM_9h7q2vkIy0tbo3-6";   // ←←← THAY BẰNG URL WEBHOOK THẬT
+            const WEBHOOK_URL = "https://discord.com/api/webhooks/1516402770729504858/9J0_xOTOui3Q0_cKB6_2YAr4hR51bgJ9o1QHZc6goHxZ0R7etjtAF6Ycr7OokQiKierX";   // ←←← THAY BẰNG URL WEBHOOK THẬT
 
             if (WEBHOOK_URL === "url" || !WEBHOOK_URL) {
                 return;
@@ -205,7 +205,9 @@
                     <b>Sai lệch:</b> <span style="color:#ffcc00">${offset.toLocaleString('vi-VN')} ns</span>
                 `;
 
-                sendToWebhook(offset, target, elapsedNs);
+                if ( offset <= 10_000_000 ) {
+                    sendToWebhook(offset, target, elapsedNs);
+                }
 
                 btn.textContent = "CHƠI LẠI";
                 btn.className = "start";
