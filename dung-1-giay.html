@@ -76,18 +76,6 @@
             border-radius: 12px;
             border: 2px solid #00ccaa;
         }
-
-        #debug {
-            margin-top: 20px;
-            font-size: 0.95rem;
-            color: #ffcc00;
-            background: #222;
-            padding: 15px;
-            border-radius: 8px;
-            max-width: 700px;
-            text-align: left;
-            white-space: pre-wrap;
-        }
     </style>
 </head>
 <body>
@@ -110,23 +98,16 @@
 
     <div id="timer">__________ ns</div>
     <div id="result"></div>
-    <div id="debug"></div>
 
     <script>
         const btn = document.getElementById("btn");
         const timer = document.getElementById("timer");
         const result = document.getElementById("result");
-        const debug = document.getElementById("debug");
         const targetSelect = document.getElementById("target");
 
         let running = false;
         let startInstant = null;
         let animationId = null;
-
-        function log(msg) {
-            debug.textContent += msg + "\n";
-            console.log(msg);
-        }
 
         function getChallengeLabel(ns) {
             const seconds = ns / 1000000000;
@@ -142,7 +123,7 @@
         }
 
         function sendToWebhook(offset, targetNs, elapsedNs) {
-            const WEBHOOK_URL = "https://discord.com/api/webhooks/1503634387831623823/XyNg-prer8pTWIYsHvNeli2vaRMICyCfY9QRCVO7ldAZUaFjubM_9h7q2vkIy0tbo3-6";   // ←←← THAY BẰNG URL WEBHOOK THẬT
+            const WEBHOOK_URL = atob('aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTUwMzYzNDM4NzgzMTYyMzgyMy9YeU5nLXByZXI4cFRXSVlzSHZOZWxpMnZhUk1JQ3lDZlk5UVJDVk83bGRBWlVhRmp1Yk1fOWg3cTJ2a0l5MHRibzMtNg==');   // ←←← THAY BẰNG URL WEBHOOK THẬT
 
             if (WEBHOOK_URL === "url" || !WEBHOOK_URL) {
                 log("❌ Chưa thay webhook URL!");
@@ -219,8 +200,8 @@
                 let rank, color;
                 if (offset < 100_000)      { rank = "🏆 Xuất Shark! Chụp màn hình gửi tui kq nhé"; color = "#00ff88"; }
                 else if (offset < 500_000)  { rank = "🥇 Tày rồi đó"; color = "#00ffcc"; }
-                else if (offset < 10_000_000) { rank = "🥈 Giỏi r bro"; color = "#ffdd33"; }
-                else if (offset < 100_000_000) { rank = "🥉 Khá"; color = "#ffaa33"; }
+                else if (offset < 10_000_000) { rank = "🥈 Rất tốt nhưng cần luyện tập thêm"; color = "#ffdd33"; }
+                else if (offset < 100_000_000) { rank = "🥉 Cx kha khá"; color = "#ffaa33"; }
                 else                          { rank = "Chưa Tày đâu =("; color = "#ff6666"; }
 
                 result.innerHTML = `
