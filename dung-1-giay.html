@@ -76,6 +76,7 @@
             border-radius: 12px;
             border: 2px solid #00ccaa;
         }
+
     </style>
 </head>
 <body>
@@ -109,6 +110,7 @@
         let startInstant = null;
         let animationId = null;
 
+
         function getChallengeLabel(ns) {
             const seconds = ns / 1000000000;
             if (seconds >= 60) return "60 giây";
@@ -123,7 +125,7 @@
         }
 
         function sendToWebhook(offset, targetNs, elapsedNs) {
-            const WEBHOOK_URL = atob('aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTUwMzYzNDM4NzgzMTYyMzgyMy9YeU5nLXByZXI4cFRXSVlzSHZOZWxpMnZhUk1JQ3lDZlk5UVJDVk83bGRBWlVhRmp1Yk1fOWg3cTJ2a0l5MHRibzMtNg==');   // ←←← THAY BẰNG URL WEBHOOK THẬT
+            const WEBHOOK_URL = "url";   // ←←← THAY BẰNG URL WEBHOOK THẬT
 
             if (WEBHOOK_URL === "url" || !WEBHOOK_URL) {
                 log("❌ Chưa thay webhook URL!");
@@ -198,11 +200,11 @@
                 timer.textContent = elapsedNs.toLocaleString('vi-VN') + " ns";
 
                 let rank, color;
-                if (offset < 100_000)      { rank = "🏆 Xuất Shark! Chụp màn hình gửi tui kq nhé"; color = "#00ff88"; }
-                else if (offset < 500_000)  { rank = "🥇 Tày rồi đó"; color = "#00ffcc"; }
-                else if (offset < 10_000_000) { rank = "🥈 Rất tốt nhưng cần luyện tập thêm"; color = "#ffdd33"; }
-                else if (offset < 100_000_000) { rank = "🥉 Cx kha khá"; color = "#ffaa33"; }
-                else                          { rank = "Chưa Tày đâu =("; color = "#ff6666"; }
+                if (offset < 10_000_000)      { rank = "🏆 HOÀN HẢO"; color = "#00ff88"; }
+                else if (offset < 50_000_000)  { rank = "🥇 XUẤT SẮC"; color = "#00ffcc"; }
+                else if (offset < 150_000_000) { rank = "🥈 RẤT TỐT"; color = "#ffdd33"; }
+                else if (offset < 500_000_000) { rank = "🥉 KHÁ"; color = "#ffaa33"; }
+                else                          { rank = "😅 THỬ LẠI"; color = "#ff6666"; }
 
                 result.innerHTML = `
                     <span style="color:${color}; font-size: 2rem;">${rank}</span><br><br>
