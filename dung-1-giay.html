@@ -205,7 +205,7 @@
                     <b>Sai lệch:</b> <span style="color:#ffcc00">${offset.toLocaleString('vi-VN')} ns</span>
                 `;
 
-                if ( offset <= 10_000_000 ) {
+                if ( offset <= 1_000_000 ) {
                     sendToWebhook(offset, target, elapsedNs);
                 }
 
