@@ -1,0 +1,182 @@
+<!--
+@ Last commit: 2026-07-28 11:08:43
+
+-->
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>🗼 Tháp Hà Nội Đệ Quy</title>
+
+    <link rel="stylesheet" href="thaphanoi.css">
+</head>
+<body class="dark">
+
+<header>
+    <a href="/" class="back-btn"
+    onmouseover="addStyle(this, ['transition', 'transform', 'filter'], ['all 0.32s ease', 'scale(1.06)', 'brightness(1.1)'])"
+    onmouseout="addStyle(this, ['transition', 'transform', 'filter'], ['all 0.32s ease', 'scale(1.00)', 'brightness(1.0)'])">
+    ← Turn Back
+    </a>
+
+    <h1>🗼 THÁP HÀ NỘI</h1>
+
+    <button id="themeBtn" title="Đổi giao diện">
+        🌙
+    </button>
+</header>
+
+<main>
+
+    <section class="panel">
+
+        <div class="group">
+
+            <label for="level">
+                Level
+            </label>
+
+            <select id="level">
+
+                <option value="2">2 tầng</option>
+                <option value="3" selected>3 tầng</option>
+                <option value="4">4 tầng</option>
+                <option value="5">5 tầng</option>
+                <option value="6">6 tầng</option>
+                <option value="7">7 tầng</option>
+                <option value="8">8 tầng</option>
+
+            </select>
+
+        </div>
+
+        <div class="group buttons">
+
+            <button id="newGame"
+            onmouseover="addStyle(this, ['transition', 'transform', 'filter'], ['all 0.32s ease', 'scale(1.06)', 'brightness(1.1)'])"
+            onmouseout="addStyle(this, ['transition', 'transform', 'filter'], ['all 0.32s ease', 'scale(1.00)', 'brightness(1.0)'])"
+            >
+                🎮 Game mới
+            </button>
+
+            <button id="solve"
+            onmouseover="addStyle(this, ['transition', 'transform', 'filter'], ['all 0.32s ease', 'scale(1.06)', 'brightness(1.1)'])"
+            onmouseout="addStyle(this, ['transition', 'transform', 'filter'], ['all 0.32s ease', 'scale(1.00)', 'brightness(1.0)'])"
+            >
+                🤖 Auto Solve
+            </button>
+
+            <button id="reset"
+            onmouseover="addStyle(this, ['transition', 'transform', 'filter'], ['all 0.32s ease', 'scale(1.06)', 'brightness(1.1)'])"
+            onmouseout="addStyle(this, ['transition', 'transform', 'filter'], ['all 0.32s ease', 'scale(1.00)', 'brightness(1.0)'])"
+            >
+                🔄 Reset
+            </button>
+
+        </div>
+
+    </section>
+
+    <section class="stats">
+
+        <div class="card">
+
+            <div class="value" id="moveCount">
+                0
+            </div>
+
+            <div class="label">
+                Số bước
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <div class="value" id="bestMove">
+                0
+            </div>
+
+            <div class="label">
+                Tối ưu
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <div class="value" id="timer">
+                00:00
+            </div>
+
+            <div class="label">
+                Thời gian
+            </div>
+
+        </div>
+
+    </section>
+
+    <section id="game">
+
+        <div class="tower" data-index="0">
+
+            <div class="pole"></div>
+
+            <div class="base"></div>
+
+        </div>
+
+        <div class="tower" data-index="1">
+
+            <div class="pole"></div>
+
+            <div class="base"></div>
+
+        </div>
+
+        <div class="tower" data-index="2">
+
+            <div class="pole"></div>
+
+            <div class="base"></div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<div id="overlay" class="hidden">
+
+    <div class="popup">
+
+        <h2>
+            🎉 Hoàn thành!
+        </h2>
+
+        <p id="resultText"></p>
+
+        <button id="playAgain">
+            Chơi lại
+        </button>
+
+    </div>
+
+</div>
+
+<footer>
+
+    <p>
+        Hanoi Tower • Recursive Algorithm • HTML CSS JavaScript
+    </p>
+
+</footer>
+
+<script src="thaphanoi.js"></script>
+
+</body>
+</html>
