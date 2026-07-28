@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Đoán Số Bí Mật</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.92);
+      color: #1a1a1a;
+      border-radius: 24px;
+      padding: 40px 28px;
+      width: 100%;
+      max-width: 460px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      margin-bottom: 2rem;
+      color: #1e3a8a;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 2rem;
+    }
+
+    input[type="number"] {
+      padding: 16px 20px;
+      font-size: 1.4rem;
+      border: 2px solid #d1d5db;
+      border-radius: 12px;
+      background: #f9fafb;
+      width: 100%;
+      outline: none;
+      text-align: center;
+      transition: all 0.2s ease;
+      color: #111827;
+    }
+
+    input[type="number"]:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+      background: white;
+    }
+
+    input::placeholder {
+      color: #9ca3af;
+    }
+
+    button {
+      padding: 16px 40px;
+      font-size: 1.25rem;
+      font-weight: 600;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    button:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    #t {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+      font-weight: 500;
+      line-height: 1.5;
+      min-height: 2.2em;
+      padding: 0 10px;
+      word-break: break-word;
+    }
+
+    /* Trạng thái thông báo */
+    .success { color: #059669; font-weight: 600; }
+    .error   { color: #dc2626; font-weight: 600; }
+    .info    { color: #7c3aed; }
+    .warning { color: #d97706; font-weight: 600; }
+
+    .small-text {
+      margin-top: 1.5rem;
+      font-size: 0.95rem;
+      color: #4b5563;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Đoán Số Bí Mật</h1>
+    
+    <div class="input-group">
+      <input 
+        type="number" 
+        id="u" 
+        placeholder="Nhập số (0 → 65536)" 
+        min="0" 
+        max="65536" 
+        autocomplete="off"
+      />
+      <button id="r">Kiểm tra</button>
+    </div>
+    <p id="t">Mình đã nghĩ ra một số từ 0 đến 65536.<br>Hãy đoán xem, bạn có tối đa 16 lần!</p>
+    <div class="small-text">Lượt đoán: <span id="count">0</span>/16</div>
+  </div>
+  <script>
+(() => {
+    function DisabledEvent() {
+        for (let [event, logic] of arguments) {
+            document.addEventListener(event, (e) => {
+                let shouldPrevent = typeof logic === "function" ? logic(e) : logic;
+                if (shouldPrevent) e.preventDefault();
+            })
+        }
+    }
+
+    DisabledEvent(
+        ["keydown", e => (e.ctrlKey && (e.key === "c" || e.key === "u")) || e.key==="F12" ],
+        ["contextmenu", true]
+    );
+    
+    const r = document.getElementById('r');
+    const t = document.getElementById('t');
+    const countEl = document.getElementById('count');
+    let k = 0;
+    const x = Math.floor(65537 * Math.random());
+
+    function updateCount() {
+      countEl.textContent = k;
+    }
+r.addEventListener("click", () => {
+
+  // Nếu đang ở trạng thái chơi lại
+  if (r.textContent.includes("lại")) {
+    window.location.reload();
+    return;
+  }
+
+  const u = Number(document.getElementById('u').value);
+
+  if (isNaN(u) || u < 0 || u > 65536) {
+    t.textContent = "Vui lòng nhập số từ 0 đến 65536 nhé!";
+    t.className = "warning";
+    return;
+  }
+
+  k++;
+  updateCount();
+
+  if (k >= 16 && u !== x) {
+    t.textContent = `Hết lượt rồi! Số đúng là: ${x} 😔`;
+    t.className = "error";
+    r.textContent = "Chơi lại";
+    return;
+  }
+
+  if (u > x) {
+    t.textContent = "Số của bạn lớn hơn số của mình";
+    t.className = "error";
+  }
+  else if (u < x) {
+    t.textContent = "Số của bạn nhỏ hơn số của mình";
+    t.className = "info";
+  }
+  else {
+    t.textContent = `Tuyệt vời! Bạn đoán đúng ${x} sau ${k} lần! 🎉`;
+    t.className = "success";
+    r.textContent = "Chơi lại";
+  }
+});
+})();
+  </script>
+
+</body>
+</html>
